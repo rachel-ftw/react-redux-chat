@@ -4,6 +4,7 @@ const controlPanelDispatcher = new Dispatcher()
 const UPDATE_USERNAME = 'UPDATE_USERNAME'
 const UPDATE_FONT_SIZE = 'UPDATE_FONT_SIZE'
 
+const userPrefsStore = new UserPrefsStore(controlPanelDispatcher)
 const userNameUpdateAction = name => {
   return {
     type: UPDATE_USERNAME,
@@ -32,21 +33,10 @@ document.forms.fontSizeForm.fontSize.forEach(element => {
 })
 
 class UserPrefsStore extends Store {
-
   getInitialState() {
-    console.log('prefs',localStorage['preferences'])
-    if(localStorage['preferences']) {
-      return JSON.parse(localStorage['preferences']
-    } else {
-      return {
-        userName: "IAmALeafyPlant",
-        fontSize: "small"
-      }
-    }
-    // return localStorage['preferences'] ? JSON.parse(localStorage['preferences'] : {
-    //   userName: "IAmALeafyPlant",
-    //   fontSize: "small"
-    // }
+    return localStorage['preferences'] 
+      ? JSON.parse(localStorage['preferences']) 
+      : {userName: "IAmALeafyPlant", fontSize: "small"}
   }
   __onDispatch(action) {
     switch(action.type) {
@@ -66,7 +56,6 @@ class UserPrefsStore extends Store {
   }
 }
 
-const userPrefsStore = new UserPrefsStore(controlPanelDispatcher)
 
 userPrefsStore.addListener(state => {
   console.info('current State:::', state)
