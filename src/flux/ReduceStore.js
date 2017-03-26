@@ -9,7 +9,7 @@ export class ReduceStore extends Store {
   }
   __onDispatch(action) {
     const newState = this.reduce(this.__state, action)
-    if(this.__state !== newState){
+    if(newState !== this.__state) {
       this.state = newState
       this.__emitChange()
     }

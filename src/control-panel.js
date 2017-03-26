@@ -4,7 +4,6 @@ const controlPanelDispatcher = new Dispatcher()
 const UPDATE_USERNAME = 'UPDATE_USERNAME'
 const UPDATE_FONT_SIZE = 'UPDATE_FONT_SIZE'
 
-const userPrefsStore = new UserPrefsStore(controlPanelDispatcher)
 const userNameUpdateAction = name => {
   return {
     type: UPDATE_USERNAME,
@@ -56,6 +55,7 @@ class UserPrefsStore extends Store {
   }
 }
 
+const userPrefsStore = new UserPrefsStore(controlPanelDispatcher)
 
 userPrefsStore.addListener(state => {
   console.info('current State:::', state)
